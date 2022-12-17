@@ -1,10 +1,22 @@
 import setuptools
+from os import path
 
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
 with open('README.md') as f:
     long_description = f.read()
+    
+try:
+    with open(path.join(here, "requirements.txt"), encoding="utf-8") as r:
+        requirements = [i.strip() for i in r]
+except FileNotFoundError:
+    requirements = ['grpcio==1.49.1', 'grpcio-tools==1.38.1', 'protobuf==3.20.3']
+try:
+    with open(path.join(here, "README.md"), encoding="utf-8") as f:
+        long_description = f.read()
+except FileNotFoundError:
+    long_description = 'https://github.com/LordDeveloper/v2client/README.md'
 
 setuptools.setup(
     name="v2client",
